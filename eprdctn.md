@@ -126,11 +126,6 @@ These instructions assume you're using the latest veersion of Windows.
    * This will open a console window. Wait for installation to complete then you will be prompted to create your LINUX user account
 1. Create your LINUX username and password. This user account has **_no relationship_** to your Windows username and password and hence can be different
 
-Sarah Cooley from Microsoft did a presentation at SFHTML5 about WSL, I think it's worth your time:
-
-<div class="video">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/JZCPYWrTLTg?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
 
 <a name="better-terminal" id="better-terminal"></a>
 
