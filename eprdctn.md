@@ -353,7 +353,6 @@ In this section we'll look at the following aspects of Node:
   * Why I chose this method
 * Installing, removing and updating packages
   * Global install
-  * Project install
 * Some examples of what you can do with Node
 
 ### Installing Node with NVM
@@ -372,6 +371,21 @@ The next step is to actually install Node.  We'll install a LTS (Long Term Suppo
 
 To install the latest release of Node 8.x run the following command:
 
+```bash
+nvm install 8
+```
+
+This will install the latest version that matches the major number you chose to install. As of this writing the latest version is `8.11.1`.  To activate the version you just installed type:
+
+```bash
+# Replace 8.11.1 with the version you installed
+nvm alias default 8.11.1
+# Use the default version you just configured
+nvm use default
+```
+
+
+
 
 
 <a name="java" id="java"></a>
@@ -387,6 +401,9 @@ To install the latest release of Node 8.x run the following command:
 
 ## Links and Resources
 
+* WSL
+  * [WSL Documentation]()
+  * [WSL interoperability with Windows]()
 * Homebrew
   * [Homebrew Website](https://brew.sh/)
 * APT-GET Guide
