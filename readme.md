@@ -245,6 +245,8 @@ Then you can use Cask to install software on your system. For example, to instal
 cask install java
 ```
 
+Cask will accept ULAs and other legal agreements for you. If these type of agreements are important **do not use Cask** and install software the old fashioned way.
+
 <a name='apt-get' id='apt-get'></a>
 
 ### Apt-get and apt-cache for Windows (?)
@@ -391,8 +393,39 @@ Node packages are called modules and can be installed in one of two ways:
 * *globally* meaning that they are available everywhere and usually provide a command line tool for you to work with
 * *project-based* meaning that they are only available for the package they are installed under
 
-Most of the tools that we'll use in an #eprdctn workflow fall in to the first category so I'll concentrate on global installation and package management. If you think this is a mistake open an issue on Github or ping me on Twitter ([@elrond25]())
+Most of the tools that we'll use in an #eprdctn workflow fall in to the first category so I'll concentrate on global installation and package management. If you think this is a mistake open an issue on Github or contact me on Twitter ([@elrond25](https://twitter.com/elrond25)). 
 
+For these examples we'll use the [Ace](https://daisy.github.io/ace/) accessibility checker from the [Daisy Consortium](http://www.daisy.org/)
+
+```bash
+npm install -g @daisy/ace
+```
+
+This will install the module and produce a command like tool for you to run: `ace`. To check the version of the tool you're using run the following command:
+
+```bash
+ace --version
+``` 
+
+### Removing Modules
+
+There are times when we need to remove modules. The command is:
+
+```bash
+npm uninstall -g @daisy/ace
+```
+
+This will cleanup the command executables and all related configuration.
+
+### Upgrading Node Modules
+
+Nodes lets you update all packages you've installed globally that have a version different from latest. The command is:
+
+```bash
+npm update -g
+```
+
+Unlike installing and uninstalling modules, you can run the update command without a specific file name and it'll work with all packages you've installed globally. 
 
 <a name="java" id="java"></a>
 
