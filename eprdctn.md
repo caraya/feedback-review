@@ -4,19 +4,19 @@
   * What is the command line?
   * Why should we care?
   * What command line tools will we use?
-    * PowerShell
-    * Windows Subsystem for Linux (WSL) on Widows
-      * Ubuntu Linux Image
+   * PowerShell
+   * Windows Subsystem for Linux (WSL) on Widows
+    * Ubuntu Linux Image
   * [Terminal](#better-terminal)
-    * iTerm 2 on MacOS
-    * default Bash shell on WSL
+   * iTerm 2 on MacOS
+   * default Bash shell on WSL
   * Before we get started
-    * Mac Users: Install XCode
-    * Windows Users: Make sure WSL and the Ubuntu Image are installed
+   * Mac Users: Install XCode
+   * Windows Users: Make sure WSL and the Ubuntu Image are installed
 * [Package managers](#package-managers)
   * Homebrew (Macintosh)
-    * Installing Ruby on WSL / Using the system Ruby on Mac
-    * Brew and Cask
+   * Installing Ruby on WSL / Using the system Ruby on Mac
+   * Brew and Cask
   * apt-get (WSL)
 * [Node.js](#node)
   * Download and Install
@@ -25,17 +25,20 @@
 * [JREs](#java)
   * Our old friend, Java
   * Differences between JDK and JRE
-    * Do I need Both?
+   * Do I need Both?
   * Installation
+* [Got Git?](#git)
+  * What it is?
+  * Hpw does it work?
 * [Basic shell concepts/commands](#shell-basics)
   * globbing
   * piping
   * the path
-    * What it is?
-    * Why is it important?
-    * Mix and Match Windows and Linux Paths through WSL
+   * What it is?
+   * Why is it important?
+   * Mix and Match Windows and Linux Paths through WSL
   * Making the shell remember the way you like things
-    * Setting your Path on MacOS and making it stick
+   * Setting your Path on MacOS and making it stick
 
 <a name="introduction" id="introduction"></a>
 
@@ -116,11 +119,11 @@ These instructions assume you're using the latest veersion of Windows.
    * Reboot the system when prompted
 1. Install your Linux Distribution
    * Open the Microsoft Store and choose your distribution. We'll be working with Ubuntu; other distributions are presented for reference.
-     * [Ubuntu](https://www.microsoft.com/store/p/ubuntu/9nblggh4msv6)
-     * [OpenSUSE](https://www.microsoft.com/store/apps/9njvjts82tjx)
-     * [SLES](https://www.microsoft.com/store/apps/9p32mwbh6cns)
-     * [Kali Linux](https://www.microsoft.com/store/apps/9PKR34TNCV07)
-     * [Debian GNU/Linux](https://www.microsoft.com/store/apps/9MSVKQC78PK6)
+   * [Ubuntu](https://www.microsoft.com/store/p/ubuntu/9nblggh4msv6)
+   * [OpenSUSE](https://www.microsoft.com/store/apps/9njvjts82tjx)
+   * [SLES](https://www.microsoft.com/store/apps/9p32mwbh6cns)
+   * [Kali Linux](https://www.microsoft.com/store/apps/9PKR34TNCV07)
+   * [Debian GNU/Linux](https://www.microsoft.com/store/apps/9MSVKQC78PK6)
 1. Select "Get"
 1. Once the download has completed, select "Launch".
    * This will open a console window. Wait for installation to complete then you will be prompted to create your LINUX user account
@@ -340,6 +343,8 @@ apt-cache pkgnames <search_term>
 <a name="node" id="node"></a>
 
 ## Node
+
+[Node.js](https://nodejs.org/en/) (or just Node) is a Javascript interpreter built on the [V8](https://developers.google.com/v8/), the same Javascript interpreter that powers Google Chrome.  Initially Node
 
 ```bash
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.1/install.sh | bash
