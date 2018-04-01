@@ -29,16 +29,17 @@
   * Installation
 * [Got Git?](#git)
   * What it is?
-  * Hpw does it work?
+  * H0w does it work?
 * [Basic shell concepts/commands](#shell-basics)
   * globbing
   * piping
   * the path
-   * What it is?
-   * Why is it important?
-   * Mix and Match Windows and Linux Paths through WSL
+    * What it is?
+    * Why is it important?
+    * Mix and Match Windows and Linux Paths through WSL
   * Making the shell remember the way you like things
-   * Setting your Path on MacOS and making it stick
+    * Setting your Path on MacOS and making it stick
+* [WSL interoperability with Windows](#wsl-interop)
 
 <a name="introduction" id="introduction"></a>
 
@@ -344,11 +345,34 @@ apt-cache pkgnames <search_term>
 
 ## Node
 
-[Node.js](https://nodejs.org/en/) (or just Node) is a Javascript interpreter built on the [V8](https://developers.google.com/v8/), the same Javascript interpreter that powers Google Chrome.  Initially Node
+[Node.js](https://nodejs.org/en/) (or just Node) is a cross platform Javascript interpreter built on the [V8](https://developers.google.com/v8/), the same Javascript interpreter that powers Google Chrome.  Initially Node was created to run Javascript on the server but it has also been used to create a lot of tools for use on personal computers. This is the side of Node that we'll concentrate in. 
+
+In this section we'll look at the following aspects of Node:
+
+* Installing Node with NVM
+  * Why I chose this method
+* Installing, removing and updating packages
+  * Global install
+  * Project install
+* Some examples of what you can do with Node
+
+### Installing Node with NVM
+
+[NVM](https://github.com/creationix/nvm) is a set of shell scripts that allow you to download, configure and use multiple versions of Node without conflict. It installs and configure the Node binaries to run from your home directory, avoding potential permission issues. 
+
+To install NVM open your terminal (or WLS though PowerShell) and paste the following command:
 
 ```bash
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 ```
+
+This will download NVM, configure your directory and set permissions appropriately. 
+
+The next step is to actually install Node.  We'll install a LTS (Long Term Support Version) 8. I'm installing a LTS version to make sure we have the best chance of our packages being supported. The latest versionn (9.x) may have changes that will not work with our software. 
+
+To install the latest release of Node 8.x run the following command:
+
+
 
 <a name="java" id="java"></a>
 
@@ -357,6 +381,9 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.1/install.sh | b
 <a name="shell-basics" id="shell-basics"></a>
 
 ## Basic shell commands, pipes, globes and others
+
+<a name="wsl-interop" id="wsl-interop"></a>
+## WSL Interoperability
 
 ## Links and Resources
 
