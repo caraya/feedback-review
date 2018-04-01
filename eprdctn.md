@@ -4,20 +4,20 @@
   * What is the command line?
   * Why should we care?
   * What command line tools will we use?
-   * PowerShell
-   * Windows Subsystem for Linux (WSL) on Widows
-    * Ubuntu Linux Image
+    * PowerShell
+    * Windows Subsystem for Linux (WSL) on Widows
+      * Ubuntu Linux Image
   * [Terminal](#better-terminal)
-   * iTerm 2 on MacOS
-   * default Bash shell on WSL
+    * iTerm 2 on MacOS
+    * default Bash shell on WSL
   * Before we get started
-   * Mac Users: Install XCode
-   * Windows Users: Make sure WSL and the Ubuntu Image are installed
+    * Mac Users: Install XCode
+    * Windows Users: Make sure WSL and the Ubuntu Image are installed
 * [Package managers](#package-managers)
-  * Homebrew (Macintosh)
-   * Installing Ruby on WSL / Using the system Ruby on Mac
-   * Brew and Cask
-  * apt-get (WSL)
+   * Homebrew (Macintosh)
+     * Installing Ruby on WSL / Using the system Ruby on Mac
+     * Brew and Cask
+   * apt-get (WSL)
 * [Node.js](#node)
   * Download and Install
   * NVM
@@ -25,7 +25,7 @@
 * [JREs](#java)
   * Our old friend, Java
   * Differences between JDK and JRE
-   * Do I need Both?
+    * Do I need Both?
   * Installation
 * [Got Git?](#git)
   * What it is?
