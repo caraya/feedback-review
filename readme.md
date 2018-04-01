@@ -384,8 +384,14 @@ nvm alias default 8.11.1
 nvm use default
 ```
 
+### Installing Node Modules
 
+Node packages are called modules and can be installed in one of two ways: 
 
+* *globally* meaning that they are available everywhere and usually provide a command line tool for you to work with
+* *project-based* meaning that they are only available for the package they are installed under
+
+Most of the tools that we'll use in an #eprdctn workflow fall in to the first category so I'll concentrate on global installation and package management. If you think this is a mistake open an issue on Github or ping me on Twitter ([@elrond25]())
 
 
 <a name="java" id="java"></a>
