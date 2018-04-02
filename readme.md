@@ -120,11 +120,11 @@ These instructions assume you're using the latest veersion of Windows.
    * Reboot the system when prompted
 1. Install your Linux Distribution
    * Open the Microsoft Store and choose your distribution. We'll be working with Ubuntu; other distributions are presented for reference.
-   * [Ubuntu](https://www.microsoft.com/store/p/ubuntu/9nblggh4msv6)
-   * [OpenSUSE](https://www.microsoft.com/store/apps/9njvjts82tjx)
-   * [SLES](https://www.microsoft.com/store/apps/9p32mwbh6cns)
-   * [Kali Linux](https://www.microsoft.com/store/apps/9PKR34TNCV07)
-   * [Debian GNU/Linux](https://www.microsoft.com/store/apps/9MSVKQC78PK6)
+     * [Ubuntu](https://www.microsoft.com/store/p/ubuntu/9nblggh4msv6)
+     * [OpenSUSE](https://www.microsoft.com/store/apps/9njvjts82tjx)
+     * [SLES](https://www.microsoft.com/store/apps/9p32mwbh6cns)
+     * [Kali Linux](https://www.microsoft.com/store/apps/9PKR34TNCV07)
+     * [Debian GNU/Linux](https://www.microsoft.com/store/apps/9MSVKQC78PK6)
 1. Select "Get"
 1. Once the download has completed, select "Launch".
    * This will open a console window. Wait for installation to complete then you will be prompted to create your LINUX user account
@@ -254,6 +254,8 @@ Cask will accept ULAs and other legal agreements for you. If these type of agree
 Linux is built around the concept of packages. Everything in a Linux distribution from the kernel, the core of the Operating System, and every application is built as a package. Ubuntu uses APT as the package manager for the distribution.
 
 There are two commands under the `apt-get` umbrella: apt-get itself and apt-cache. apt-get is for installing, upgrading and cleaning packages while apt-cache is used for finding new packages. We'll look at the basic uses for both these commands in the next sections.
+
+In the following sections `ack` is the name of the package we'll be working with, not part of the commands. 
 
 #### Update package database with apt-get
 
