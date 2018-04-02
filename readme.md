@@ -392,8 +392,8 @@ nvm use default
 
 Node packages are called modules and can be installed in one of two ways: 
 
-* *globally* meaning that they are available everywhere and usually provide a command line tool for you to work with
-* *project-based* meaning that they are only available for the package they are installed under
+* ***globally*** meaning that they are available everywhere and usually provide a command line tool for you to work with
+* ***project-based*** meaning that they are only available for the package they are installed under
 
 Most of the tools that we'll use in an #eprdctn workflow fall in to the first category so I'll concentrate on global installation and package management. If you think this is a mistake open an issue on Github or contact me on Twitter ([@elrond25](https://twitter.com/elrond25)). 
 
@@ -432,6 +432,31 @@ Unlike installing and uninstalling modules, you can run the update command witho
 <a name="java" id="java"></a>
 
 ## Java: JRE vs JDK, oh my!
+
+We still use Java for some applications like [Epubcheck](https://github.com/IDPF/epubcheck/releases). The advantage of working with Java applications is that you run the same application in all platforms (Windows, Mac and Linux) without customizing for each operating system. 
+
+### Different versions of Java: JDK and JRE
+
+You may hear the words Java, JDK, JRE thrown out when people talk about Java software. Let's try to cllear some of the confusion. 
+
+- **Java** is the language
+- **JDK** is the Java Development Kit. It contains all the tools that you need to compile and run applications written in the Java language
+- **JRE** is the Java Runtime Environment. It allows you to run Java applications but **not** compile or build them
+
+To run applications either the JRE or JDKK will work.  For simplicity sake, we'll install the JDK in the examples below. 
+
+### Installing and Managing Java on the Mac: Use Cask
+
+As discussed earlier in the Package Management Homebrew has a software management script called Cask. We'll expand on that section to cover installing, uninstalling and removing older versions of software using Java as an example. 
+
+Cask will accept ULAs and other legal agreements for you. If these type of agreements are important **do not use Cask** and install software the old fashioned way.
+
+#### Installing software
+
+```bash
+cask install java
+```
+
 
 <a name="shell-basics" id="shell-basics"></a>
 
