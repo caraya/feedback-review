@@ -14,10 +14,10 @@
     * Mac Users: Install XCode
     * Windows Users: Make sure WSL and the Ubuntu Image are installed
 * [Package managers](#package-managers)
-   * Homebrew (Macintosh)
-     * Installing Ruby on WSL / Using the system Ruby on Mac
-     * Brew and Cask
-   * apt-get (WSL)
+  * Homebrew (Macintosh)
+    * Installing Ruby on WSL / Using the system Ruby on Mac
+    * Brew and Cask
+  * apt-get (WSL)
 * [Node.js](#node)
   * Download and Install
   * NVM
@@ -71,7 +71,7 @@ All Operating Systems have a CLI. Yes, even Windows and MacOS.
 
 This is important because sooner or later you will find tools that will only work from a command line interface. We'll explore some of these tools (Node, Daisy Ace) in later sections but it's important make this clear.
 
-## What command line tools will we use? What tools will we not use?
+## What command line tools will we use?
 
 In Windows the better tools are [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/powershell-scripting?view=powershell-6) a souped up terminal shell with additional scripting capabilities, and [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/about) a way to run Linux native applications from Windows. It uses a Ubuntu Linux image for Windows, not a modified version of Linux to run on Windows but a full version of Ubuntu Linux that will work together with Windows.
 
@@ -81,7 +81,7 @@ As far as terminals are concerned we'll use the [iTerm2](https://www.iterm2.com/
 
 Before we jump into further installations and customizations we need to do a few things that are dependent on the Operating System we're using.
 
-### Mac Users: Install XCode
+### Mac Users: Install XCode Command Line Tools
 
 Before we install Homebrew we need to install Xcode command line tools. These are part of the full Xcode download but I'd rather save you the 5GB+ download so we'll go the slim (but with more steps) route instead.
 
@@ -129,7 +129,6 @@ These instructions assume you're using the latest veersion of Windows.
 1. Once the download has completed, select "Launch".
    * This will open a console window. Wait for installation to complete then you will be prompted to create your LINUX user account
 1. Create your LINUX username and password. This user account has **_no relationship_** to your Windows username and password and hence can be different
-
 
 <a name="better-terminal" id="better-terminal"></a>
 
@@ -255,7 +254,7 @@ Linux is built around the concept of packages. Everything in a Linux distributio
 
 There are two commands under the `apt-get` umbrella: apt-get itself and apt-cache. apt-get is for installing, upgrading and cleaning packages while apt-cache is used for finding new packages. We'll look at the basic uses for both these commands in the next sections.
 
-In the following sections `ack` is the name of the package we'll be working with, not part of the commands. 
+In the following sections `ack` is the name of the package we'll be working with, not part of the commands.
 
 #### Update package database with apt-get
 
@@ -349,7 +348,7 @@ apt-cache pkgnames <search_term>
 
 ## Node
 
-[Node.js](https://nodejs.org/en/) (or just Node) is a cross platform Javascript interpreter built on the [V8](https://developers.google.com/v8/), the same Javascript interpreter that powers Google Chrome.  Initially Node was created to run Javascript on the server but it has also been used to create a lot of tools for use on personal computers. This is the side of Node that we'll concentrate in. 
+[Node.js](https://nodejs.org/en/) (or just Node) is a cross platform Javascript interpreter built on the [V8](https://developers.google.com/v8/), the same Javascript interpreter that powers Google Chrome. Initially Node was created to run Javascript on the server but it has also been used to create a lot of tools for use on personal computers. This is the side of Node that we'll concentrate in.
 
 In this section we'll look at the following aspects of Node:
 
@@ -361,7 +360,7 @@ In this section we'll look at the following aspects of Node:
 
 ### Installing Node with NVM
 
-[NVM](https://github.com/creationix/nvm) is a set of shell scripts that allow you to download, configure and use multiple versions of Node without conflict. It installs and configure the Node binaries to run from your home directory, avoding potential permission issues. 
+[NVM](https://github.com/creationix/nvm) is a set of shell scripts that allow you to download, configure and use multiple versions of Node without conflict. It installs and configure the Node binaries to run from your home directory, avoding potential permission issues.
 
 To install NVM open your terminal (or WLS though PowerShell) and paste the following command:
 
@@ -369,9 +368,9 @@ To install NVM open your terminal (or WLS though PowerShell) and paste the follo
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 ```
 
-This will download NVM, configure your directory and set permissions appropriately. 
+This will download NVM, configure your directory and set permissions appropriately.
 
-The next step is to actually install Node.  We'll install a LTS (Long Term Support Version) 8. I'm installing a LTS version to make sure we have the best chance of our packages being supported. The latest versionn (9.x) may have changes that will not work with our software. 
+The next step is to actually install Node. We'll install a LTS (Long Term Support Version) 8. I'm installing a LTS version to make sure we have the best chance of our packages being supported. The latest versionn (9.x) may have changes that will not work with our software.
 
 To install the latest release of Node 8.x run the following command:
 
@@ -379,7 +378,7 @@ To install the latest release of Node 8.x run the following command:
 nvm install 8
 ```
 
-This will install the latest version that matches the major number you chose to install. As of this writing the latest version is `8.11.1`.  To activate the version you just installed type:
+This will install the latest version that matches the major number you chose to install. As of this writing the latest version is `8.11.1`. To activate the version you just installed type:
 
 ```bash
 # Replace 8.11.1 with the version you installed
@@ -388,14 +387,26 @@ nvm alias default 8.11.1
 nvm use default
 ```
 
+**Note:** Installing newer versions of Node with NVM will not delete older versions. For example, you can install Node 8.12 and still switch back and forth between versions using `node use` and the version you want to use for a specific project.
+
+If you've already installed packages for a version of Node you can migrate the packages to the new installation. To do so run the following command (using a hypothetical version 8.12)
+
+```bash
+nvm install 8.12 --reinstall-packages-from=8.11
+```
+
+Installing packages from an older version requires you to specify the version you're installing from. It is not enough to say version 8... you're installing the latest release from that version, right?
+
 ### Installing Node Modules
 
-Node packages are called modules and can be installed in one of two ways: 
+Installing Node also installs [NPM](https://www.npmjs.com/), the Node Package Manager. This is the name of the tool and the ecosystem and repository that has evolved around it. _We'll use NPM to refer to the command line tool we use to install modules_.
 
-* ***globally*** meaning that they are available everywhere and usually provide a command line tool for you to work with
-* ***project-based*** meaning that they are only available for the package they are installed under
+Node packages are called modules and can be installed in one of two ways:
 
-Most of the tools that we'll use in an #eprdctn workflow fall in to the first category so I'll concentrate on global installation and package management. If you think this is a mistake open an issue on Github or contact me on Twitter ([@elrond25](https://twitter.com/elrond25)). 
+* **_globally_** meaning that they are available everywhere and usually provide a command line tool for you to work with
+* **_project-based_** meaning that they are only available for the package they are installed under
+
+Most of the tools that we'll use in an #eprdctn workflow fall in to the first category so I'll concentrate on global installation and package management. If you think this is a mistake open an issue on Github or contact me on Twitter ([@elrond25](https://twitter.com/elrond25)).
 
 For these examples we'll use the [Ace](https://daisy.github.io/ace/) accessibility checker from the [Daisy Consortium](http://www.daisy.org/)
 
@@ -407,7 +418,9 @@ This will install the module and produce a command like tool for you to run: `ac
 
 ```bash
 ace --version
-``` 
+```
+
+This installation introduces another concept worth paying attention to: [scoped packages](https://docs.npmjs.com/misc/scope) as a way to keep your group related packages together/ It also affect a few things about the way npm treats the package.
 
 ### Removing Modules
 
@@ -427,49 +440,190 @@ Nodes lets you update all packages you've installed globally that have a version
 npm update -g
 ```
 
-Unlike installing and uninstalling modules, you can run the update command without a specific file name and it'll work with all packages you've installed globally. 
+Unlike installing and uninstalling modules, you can run the update command without a specific file name and it'll work with all packages you've installed globally.
 
 <a name="java" id="java"></a>
 
 ## Java: JRE vs JDK, oh my!
 
-We still use Java for some applications like [Epubcheck](https://github.com/IDPF/epubcheck/releases). The advantage of working with Java applications is that you run the same application in all platforms (Windows, Mac and Linux) without customizing for each operating system. 
+We still use Java for some applications like [Epubcheck](https://github.com/IDPF/epubcheck/releases). The advantage of working with Java applications is that you run the same application in all platforms (Windows, Mac and Linux) without customizing for each operating system.
 
 ### Different versions of Java: JDK and JRE
 
-You may hear the words Java, JDK, JRE thrown out when people talk about Java software. Let's try to cllear some of the confusion. 
+You may hear the words Java, JDK, JRE thrown out when people talk about Java software. Let's try to cllear some of the confusion.
 
-- **Java** is the language
-- **JDK** is the Java Development Kit. It contains all the tools that you need to compile and run applications written in the Java language
-- **JRE** is the Java Runtime Environment. It allows you to run Java applications but **not** compile or build them
+* **Java** is the language
+* **JDK** is the Java Development Kit. It contains all the tools that you need to compile and run applications written in the Java language
+* **JRE** is the Java Runtime Environment. It allows you to run Java applications but **not** compile or build them
 
-To run applications either the JRE or JDKK will work.  For simplicity sake, we'll install the JDK in the examples below. 
+To run applications either the JRE or JDKK will work. For simplicity sake, we'll install the JDK in the examples below.
 
 ### Installing and Managing Java on the Mac: Use Cask
 
-As discussed earlier in the Package Management Homebrew has a software management script called Cask. We'll expand on that section to cover installing, uninstalling and removing older versions of software using Java as an example. 
+As discussed earlier in the Package Management Homebrew has a software management script called Cask. We'll expand on that section to cover installing, uninstalling and removing older versions of software using Java as an example.
 
 Cask will accept ULAs and other legal agreements for you. If these type of agreements are important **do not use Cask** and install software the old fashioned way.
 
+#### Installing Cask
+
+Install Cask with the following Homebrew command.
+
+```bash
+brew tap caskroom/cask
+```
+
+This will make the `cask` command available. To verify the installation run:
+
+```bash
+cask --version
+```
+
+If the command is successful it should print something like the content below to the screen.
+
+```bash
+Homebrew-Cask 1.5.13
+caskroom/homebrew-cask (git revision 63231; last commit 2018-03-30)
+```
+
 #### Installing software
+
+To install Java use the following command.
 
 ```bash
 cask install java
 ```
 
+This will download the software, install it (accepting any required EULA or license) and make the software available to you.
+
+#### Updating Software
+
+Java is notorius for quick updates and security fixes. It appears that, along with Adobe Acrobat, Java is a favorite target of hackers and malware writers.
+
+You should get into the habit of periodically updating your version of Java and testing your applications against the new version.
+
+The command:
+
+```bash
+cask upgrade Java
+```
+
+#### Reinstalling Software
+
+There are times when things break. Configuration files may get corrupted or you may accidentally delete something on a package that you didn't mean to.
+
+Rather than uninstall and reinstall cask gives you the option of reinstall. This command reinstalls the application and leaves it as if you just installed it for the first time.
+
+```bash
+cask reinstall java
+```
+
+### Installing Java on Windows
+
+Rather than automate the installation on Windows, I think the best way to go in Windows is to manually install Java as a Windows application and run that version from either Windows or Linux by tking advantage of the interoperabillity WSL provides (subject of a later section).
+
+To install Java on Windows:
+
+* Go to the Java [Manual download](https://www.java.com/en/download/manual.jsp) page
+* Click on Windows Offline
+  * The File Download dialog box appears prompting you to run or save the download file
+  * Click Save to download the file to a known location on your local system, for example, your desktop
+* Close all applications including the browser
+* Double-click on the saved file to start the installation process
+* The installation process starts. Click the Install button to accept the license terms and to continue with the installation
+* Oracle offer various products to install alongside Java. You are not required to install any of these partner products and their instllation (or lack thereof) should not affect Java at all
+* A few dialogs confirm the last steps of the installation process
+  * Click Close on the last dialog. This will complete Java installation process.
 
 <a name="shell-basics" id="shell-basics"></a>
 
 ## Basic shell commands, pipes, globes and others
 
+Since we're working on the command line we also need to lear
+
+### Globes
+
+There are times when we need to match commands against one or more files. It can be as simple as listing only files of a certain type or having the command run only on some files, not others.
+
+Unix-like shells (like those on MacOS and WSL) provide globs (global or pattern matching) to help you with the seaarchhes. I could go on for pages and pages about globs, but rather than do that I will give you some examples and let you explore further on your own.
+
+The two
+
+<dl>
+  <dt>*</dt>
+  <dd>Matches any string, including the null string.</dd>
+  <dt>?</dt>
+  <dd>Matches any single character.</dd>
+</dl>
+
+The following command will search the current directory for files that end with `.xhtml`. This can be useful to get a listing of all files of a given type in a directory.
+
+```bash
+# Search for all XHTML files in the current directory
+# We define XHTML files as any file that ends with .xhtml
+ls -al *.xhtml
+```
+
+The `?` pattern matcher matches a single character. This is useful when you have a sequential list of files that are different by a single character. The example below would match all files that start with the word index, a single character and then end with .html. It Would match index1.html but not index10.html or index.html
+
+```bash
+# Search for all files that start with the word index,
+# a single character and then end with .html
+# Would match index1.html
+# but not index10.html or index.html
+ls -al index?.html
+```
+
+Newer version of Bash will let you recursively match using the `**` pattern. This is not guaranteed to work everywhere so it's offered here for you to try it.
+
+```bash
+# sets the recursive match option
+shopt -s globstar
+# Recursive search the current and all children directories
+# for python files (anything that ends with .py)
+ls **/*.py
+```
+
+For more information check this [wiki page](http://mywiki.wooledge.org/glob). It contains much more indepth and detailed information about glob patterns.
+
+### Pipes
+
+A pipe pipeline is a sequence of one or more commands separated by the control operators `|`. The idea is that we run the first command then process the output of the next command (left to right) until we've ran all the commands on the pipe.
+
+The following command will create a listing of all the files in a directory and look for the word index in the result
+
+```bash
+ls -al | grep index
+```
+
+### Redirection
+
+Another type of pipe is used to redirect the output of a file into another, usually a text file or some kind. The most typical example is piping the output of a command, in this case `ls -al` to a text file.
+
+```bash
+ls -al > content.txt
+```
+
+### Creating aliases: What, Why and How?
+
+There are times when typing the same command, particularly if it's a long command or one with many parameters, can be tedious and cause more errors than we care.
+
 <a name="wsl-interop" id="wsl-interop"></a>
+
 ## WSL Interoperability
+
+```powershell
+wsl sudo apt-get update
+```
+
+```powershell
+dir | wsl grep foo
+```
 
 ## Links and Resources
 
 * WSL
-  * [WSL Documentation]()
-  * [WSL interoperability with Windows]()
+  * [WSL Documentation](https://docs.microsoft.com/en-us/windows/wsl/about)
+  * [WSL interoperability with Windows](https://docs.microsoft.com/en-us/windows/wsl/interop)
 * Homebrew
   * [Homebrew Website](https://brew.sh/)
 * APT-GET Guide
