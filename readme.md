@@ -36,10 +36,10 @@
   * the path
     * What it is?
     * Why is it important?
-    * Mix and Match Windows and Linux Paths through WSL
   * Making the shell remember the way you like things
     * Setting your Path on MacOS and making it stick
 * [WSL interoperability with Windows](#wsl-interop)
+* [Links and Resources](#links)
 
 <a name="introduction" id="introduction"></a>
 
@@ -605,19 +605,91 @@ ls -al > content.txt
 
 ### Creating aliases: What, Why and How?
 
-There are times when typing the same command, particularly if it's a long command or one with many parameters, can be tedious and cause more errors than we care.
+There are times when typing the same command, particularly if it's a long command or one with many parameters, can be tedious and cause more errors than we care for. The bash shell provides ways to create shortcuts in the way of aliases.
+
+You can create aliases for the current session using the alias command in the current shell. For example, if you paste the following command on your terminal:
+
+```bash
+alias ll="ls -lhA"
+```
+
+It will create the `ll` command which will list all fikes and directories in long format skipping the current and parent directories.
+
+The problem with this approach is that the command will only last as your logged in to the shell where you entered it. When you log in the commands are gone.
+
+There is a way to create aliases that will persist through different shells. This works in Mac and, somewhat, in Windows though WSL.
+
+First, make sure that the Nano package is installed in your Mac via Homebrew
+
+```
+brew install nano
+```
+
+The following steps are the same for Mac and Windows
+
+```bash
+# Makes sure you're in your home directory
+cd
+# Opens or creates the file .bash_profile
+nano .aliases
+```
+
+<figure>
+  <img src='../images/nano-editing-aliases.png' alt='Nano editor working on aliases file'>
+  <figcaption>Nano editor working on aliases file</figcaption>
+</figure>
+
+When in the editor opens the file you will see an empty file or the result of your prior work.
+
+Enter the new alias that you want to keep at the bottom of the file. If you're entereing multiple aliases the order in which you do is not important.
+
+Bash will read the entire file before starting and will flag any syntax errors.
+
+There are two ways to get Bash to pick up the changes to your `.aliases` files. One is to open a new shell. The second one is to source the aliases files. The command is:
+
+```bash
+source .aliases
+```
+
+This command will force Bash to read the `.aliases` file and make all the aliases you created available to the shell.
+
+### The path
+
+In the Unix world, the path is the list of directories the shell follows when 
 
 <a name="wsl-interop" id="wsl-interop"></a>
 
 ## WSL Interoperability
 
+One important thing that Windows users should know. There is a reason why we went through all the work of installing PowerShell and WSL: Interoperability.
+
+WSL and Powershell were designed to work together and are continuosly improved in the interoperability front. This can take one the following ways:
+
+You can run Linux commands from Windows prepending the `wsl` command to the command you want to run. The example below runs Ace installed via NPM on Linux.
+
+If this meets your needs, then you don't need to install Node on Windows. Running `wsl node` will take care of it when working on PowerShell and `node` will work when running on WSL.
+
 ```powershell
-wsl sudo apt-get update
+wsl ace --help
 ```
+
+You can mix commands too. The example below shows how to run a Windows command (`dir`) and pipe it to a Linux command with `wsl` (`wsl grep foo`).
 
 ```powershell
 dir | wsl grep foo
 ```
+
+You can also do it the other way around and use Windows applications from the Linux shell. For example if you wanted to use Java to run Epubcheck from within a Linux shell you could run:
+
+```bash
+java.exe -jar epubcheck.jar
+```
+
+The `.exe` suffix to the application is important. It is what tells WSL that it's a Windows application; it also means that you don't have to install applications in both places, installing them in Windows should be enough.
+
+Note that these commands don not work with aliases. As far as I know I can't create an alias in WSL's Bash shell and run it using `wsl` + alias.
+
+<a name="links" id="links"></a>
 
 ## Links and Resources
 
