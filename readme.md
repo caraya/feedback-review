@@ -546,7 +546,7 @@ There are times when we need to match commands against one or more files. It can
 
 Unix-like shells (like those on MacOS and WSL) provide globs (global or pattern matching) to help you with the seaarchhes. I could go on for pages and pages about globs, but rather than do that I will give you some examples and let you explore further on your own.
 
-The two
+The two most often used patterns are `*` and `?`.
 
 <dl>
   <dt>*</dt>
