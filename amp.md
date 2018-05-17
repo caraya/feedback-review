@@ -26,35 +26,39 @@ The AMP team acts as gatekeepers for what is and isn't part of the AMP stack and
 
 **Since we can't use Javascript on AMP content, how can we leverage web APIs? I understand that you're working on relaxing the restriction of using Javascript in AMP content and experimenting with using workers to offload running scripts (amp-script) but, right now, I can't use any APIs that the AMP team doesn't allow. How is that putting users first?**
 
-I think I figured out the cause but not the reasoning behind it. Until the AMP team relaxes the restrictions for scripts on AMP content the custom elements that make the AMP HTML vocabulary do not accept scripts so whenever scripts needs to inject content into the page they will fail and the content will not render as expected.
+I think I figured out the cause but not the reasoning behind it. Until the AMP team relaxes the restrictions for scripts on AMP content the AMP library itself will not accept scripts other than the ones they whitelist, so whenever scripts needs to inject content into the page they will fail and the content will not render as expected.
 
 In my case with my code highlights I still get something that looks different enough from my content to be distinguishable from prose but not what I expected as syntax highlighted code.
 
-The last bit is actually two parts intertwined together.
+I guess I could pre-process the content and insert the elements I need before the content is loaded but doesn't that defeat the purpose?
 
-**Who answers if there's a problem?**
+## Who answers if there's a problem?
 
-Unless you make your AMP content fully and deliberately accessible, users will only see it when they arrive to it from a link that uses AMP or from a search engine result. At first I started asking myself why bother?
+Until better tooling is available it's very hard to do good AMP development. Given all the restrictions of what you can't do and how you should do what you can, it's hard to remember that your primary IDEs for AMP are Dev Tools and the Google Search Console for your site.
 
-Most people won't bother to check the search console to see if there is a problem with search and AMP or know how to fix it (I have a problem with linked data being wrong but since I didn't write the plugin or the AMP tags being used to generate it, I have no idea about how to solve the problem) so having AMP working is not guarantee that the tool is working properly, or at all.
+Most people won't bother to check the search console to see if there is a problem with search and AMP or know how to fix it (I had a problem with linked data being wrong but since I didn't write the plugin or the AMP tags being used to generate it, I had no idea about how to solve the problem) so having AMP working is not guarantee that the tool is working properly, or at all...
 
 So whose fault is it? Mine? The plugin developer? The AMP team?
 
-**This is only applicable for large hosted sites but what effect does poor content have on AMP search rankings?**
+We also don't know if [AMP Validation Errors](https://www.ampproject.org/docs/troubleshooting/validation_errors) will cause the page not to render or if these are warnings of things that must be fixed to be compliant.
+
+**Garbage in, Garbage out**
 
 I host my own installation of Wordpress so this is less of an issue for me. But for the people who host content in Wordppress dot com this may come in as a surprise: **_AMP is enabled by default!_** (see [AMP (Accelerated Mobile Pages)](https://en.support.wordpress.com/amp-accelerated-mobile-pages/) in the Wordpress dot com support site).
 
 Twitter is also sending users to AMP version of the content (when available) by default. **Shouldn't this be an opt in experience rather than opt out or no choice at all?**
 
-So we have situations where the AMP content matches the canonical content, AMP is not the canonical content, and where there is no quality control for the content that gets higer in the Google search results because it uses AMP. Who wins in this scenario?
+This is less of an issue for Twitter than it is for Wordpress because in the earlier, it's a concious action to linkn to a resource.  In Wordpress it's a setting enabled by default so it'll publish AMP until you've actively disabled it so people may not be fully aware that they are publishing AMP and not really care about it.
+
+So we have situations where the AMP content matches the canonical content, AMP is not the canonical content, and where there is no quality control for the AMP content itself... in the WordPress case, I doubt many users are aware that they are publishing AMP content. So if we get low-quality content pushed into AMP, who wins in this scenario?
 
 ## Duplicating effort?
 
-When AMP first came out as a mobile optimization library I had my reservations but saw it as an interim solution to the mobile performance issues that I see documented everywhere and that have gotten progressively worse.
+When AMP first came out as an optimization library I had my reservations but saw it as an interim solution to the mobile performance issues that I see documented everywhere and that have gotten progressively worse.
 
 But it's not about improving mobile performance anymore.
 
-The concept of _amp stories_ and the associated elements that we must use to build them are a completely different concept and, to be honest, they frighten the hell out of me.
+The concept of **_amp stories_** and the associated elements that we must use to build them are a completely different concept and, to be honest, they frighten the hell out of me.
 
 The concept of stories at least according to the news I've read out there, throws the concept of non-AMP sites out the window. **If there is no equivalency check, what will search engines do when the content is different? Which version of the content will get priority?**
 
@@ -70,20 +74,9 @@ According to [Search Engine Land](https://searchengineland.com/amp-stories-new-a
 >
 > > This does not run counter to the idea that the publisher may also have separate expressions [of] similar content published. Say a publisher has a long-form analysis article about college admissions data. Then, say they have a companion piece that’s an interactive experience letting people play with the data through charts and other visualizations. It wouldn’t be correct to call the long-form piece the canonical for the interactive. They each stand on their own, although being related.
 
-This bothers me in so many levels but I'll start with the most basic concern and fear: Are we turning the mobile web into a single vendor experience? Will this force other search engines into playing the AMP game or be left behind?
+This bothers me in so many levels but I'll start with the most basic concern and fear: Are we turning the mobile web into a single vendor experience? Will this difference between stories and web content force publishers into AMP or be left behind by not providing good results in the search page?
 
 How about leveraging other parts of the web platform to tell the same type of stories you do with AMP? Again, isn't improving the whole web experience the name of the game?
-
-**Who is AMP competing with? Inside Google? Outside?**
-
-I've always wondered how can Google support so many technologies that, some times, compete with each other. Some of the specific questions I have:
-
-* Can you generate AMP HTML from an Angular application? If not then how do I provide an AMP alternative for an Angular application?
-* How does AMP coexist with Polymer elements and elements created with other web-components frameworks?
-
-Outside competition is easier to measure. Facebook and Apple each has their own content format to enable easy agregation. Facebook uses its platform for delivery and Apple leverages the News App in iOS.
-
-We can ask the same question we asked about Angular for any other framework available in the Market
 
 ## Technical questions
 
@@ -150,13 +143,13 @@ Some of the requirements and limitations of AMP are not evident. According to [A
 
 If this was all that AMP required for compliance I'd be ok. I've always been a gun-ho fan of proper page structure and including the appropriate elements where they should be. Death to tagsoup markup!
 
-I love the idea of having metadata inlined in the document. This makes it eaasier to support in the long run.
+I love the idea of having metadata inlined in the document. This makes it easier to enforce (it's part of the AMP html spec) but it may make it harder to support in the long run as any change to the doc would require.
 
 I may even forgive the extra attribute (other than class) in the html element.
 
 But this is just the beginning.
 
-Amp not only requires a certain structure from your HTML page but it changes some elements for AMP-specific ones and completely disaallows others. I'm mostly OK with the tag it forbids as they are mostly legacy elements that have been kept on the specifications for legacy compatibility reasons. I mean, seriously, frameset and frames? It's 2018 people... we have better ways of doing that!
+Amp not only requires a certain structure from your HTML page but it changes some elements for AMP-specific ones and completely disallows others. I'm mostly OK with the tag it forbids as they are mostly legacy elements that have been kept on the specifications for compatibility (don't break the web) reasons. I mean, seriously, frameset and frames? It's 2018 people... we have better ways of doing that!
 
 The table below (also from the [AMP HTML Specification](https://www.ampproject.org/docs/fundamentals/spec)) explains the limitations and changes that AMP makes to standard HTML elements. Some of these changes help explain the structure of the example page seen earlier.
 
@@ -257,11 +250,13 @@ The table below (also from the [AMP HTML Specification](https://www.ampproject.o
 
 But it's the changes that they make to standard HTML elements that worry me. Do we really need an image custom element? video? audio?
 
-I don't think this solves the underlying problems of the web. It doesn't change the fact that loading speed numbers are getting slower, not faster for the mobile web.
+I don't think this solves the underlying problems of the web. It doesn't change the fact that loading speed and payload size numbers are getting slower and bigger, not faster and smaller for the mobile web.
 
 See the HTTP Archive [comparison data between January 1, 2017 and March 15, 2018](https://httparchive.org/reports/loading-speed?start=2017_01_01&end=latest) for an idea of what I'm talking about.
 
-It doesn't change the fact that we still have megabytes of images (not all of them compressed), several hundred KBs of fonts, and huge bundles of Javascript that will take tens of seconds to load and unblock page rendering.
+Granted, the HTTPArchive crawl may not catch AMP pages in its mobile results and that the pages in the crawl may not have a link to the AMP version of the page so the numbers may not reflect the actual improvements (if any) that AMP has made on the web
+
+But AMP doesn't change the fact that we still have megabytes of images (even if they are compressed), several hundred KBs of fonts, and huge bundles of Javascript that will take tens of seconds to load and unblock page rendering. Even though people, companies and doc sites have been promoting best practices for years there has been no real improvement on how we work on the web
 
 There are many more solutions outside of AMP that will give you performant web content. I think the biggest issue is that people may not know or may not care about these new technologies and smaller libraries that will take care of some performance bottlenecks.
 
@@ -271,17 +266,17 @@ Hand writing AMP is different than writing HTML but how do we generate AMP when 
 
 Condé Nast has published information on [how they generate the AMP content](https://technology.condenast.com/story/evolving-google-amp-at-conde-nast) for each of their publications: Allure, Architectural Digest, Ars Technica, Backchannel, Bon Appétit, Brides, Condé Nast Traveler, Epicurious, Glamour, Golf Digest, GQ, Pitchfork, Self, Teen Vogue, The New Yorker, Vanity Fair, Vogue, W and Wired.
 
-Their system is failry intricate as the image below illustrates:
+Their system is fairly intricate as the image below illustrates:
 
 <figure>
-  <img src='https://media.condenast.io/photos/59a57e16cf742825d0b02891/master/w_680/AMP-Arch.png' alt='AMP Generation Process at Condé Nast'>
+  <img src='https://media.condenast.io/photos/59a57e16cf742825d0b02891/master/w_680/AMP-Arch.png' alt='AMP Generation Process at Condé Nast' width="100%" height="auto">
   <figcaption>AMP Generation Process at Condé Nast. From <a href="https://technology.condenast.com/story/the-why-and-how-of-google-amp-at-conde-nast">The Why and How of Google AMP at Condé Nast</a></figcaption>
 </figure>
 
 And the AMP generation process itself looks like it's rather complex, running from Markdown to React that then converts the Markdown content into valid AMP HTML:
 
 <figure>
-  <img src='https://media.condenast.io/photos/59a57e3dcf742825d0b02893/master/w_680/AMP-Pipeline.png' alt='alt-text'>
+  <img src='https://media.condenast.io/photos/59a57e3dcf742825d0b02893/master/w_680/AMP-Pipeline.png' width="100%" height="auto" alt='alt-text'>
   <figcaption>Condé Nast AMP Service Pipeline. From <a href="https://technology.condenast.com/story/the-why-and-how-of-google-amp-at-conde-nast">The Why and How of Google AMP at Condé Nast</a></figcaption>
 </figure>
 
@@ -291,9 +286,29 @@ Furthermore, I'm concerned about the ammount of work needed to get AMP into a CM
 
 Another thing that comes to mind when it comes to generating AMP programmatically is how much of the CSS we use in our normal site can we use with AMP?
 
-The AMP specification requires developers to use no more than 50kb of CSS and, on its face, it's a sensible requirement until we realize that CSS animations and any extra prefixing we need to acomodate browser idiosyncracies would also fall under that limitation and we need to decide early on how will we make the CSS fit into the 50KB requirements or how much to take out to make the CSS fit the size restriction and still keep branding folks happy.
+The AMP specification requires developers to use no more than 50kb of CSS and, on its face, it's a sensible requirement. That is until we realize that CSS animations and any extra prefixing we need to acomodate browser idiosyncracies would also fall under that limitation and we need to decide early on how will we make the CSS fit into the 50KB requirements or how much to take out to make the CSS fit the size restriction and still keep branding folks happy. **This is not to say we should dump hundred and hundred of lines of useless CSS into our pages** but we should be the ones who decide how much CSS we use and how the CSS we use interacts with the existing content of the page.
 
 Same thing with Javascript.
+
+### Specific Use Cases
+
+My specific cases are [Codepen](https://codepen.io/) embeds and [Prism.js](http://prismjs.com/) code syntax highlighting.
+
+The typical Codepen emebd looks like this:
+
+```html
+<p data-height="395" data-theme-id="dark" data-slug-hash="aGVPvL"
+data-default-tab="html,result" data-user="caraya" data-embed-version="2"
+data-pen-title="Simplified Article "
+class="codepen">See the Pen <a href="https://codepen.io/caraya/pen/aGVPvL/">Simplified Article</a>
+by Carlos Araya (<a href="https://codepen.io/caraya">@caraya</a>)
+on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+```
+
+As far as I understand AMP, this would not work in an AMP page. AMP will not let you use `script` tags in a page, and even if AMP allows `data-*` attributes on elements they are useless because there's nothing to process them with.
+
+Same thing with Prism. It works by adding a script and a style sheet to the page and then expects properly coded blocks of preformated text for the content to be highlighted. To validate AMP content I am not allowed to have additional script tags on the head or before the end of my document and, in theory, I should be able to merge Prism's CSS with the AMP required CSS and my site's CSS but would that work in 50KB of CSS that we're allowed to add?
 
 ### CORS for my own site?
 
@@ -303,19 +318,18 @@ When you go to a site, for example: `https://www.gq.com/story/gq-eye-exclusive-f
 
 But what happens if you need to load data for your application? Say you want to load product data for your shopping cart, or a tour date list for your favorite band? Those are stored on your server, not the cache and for them to work properly you need to set CORS headers on them so they will work for origins other than yours.
 
-On a side note, if you hit the AMP cache URL from a desktop browser it will redirect you to the desktop, however, if you hit an AMP link using an activation script like `https://www.gq.com/story/gq-eye-exclusive-fatherhood-style-series---todd-snyder/amp` it will take you to the AMP version, regardless of platform or form factor.
+On a side note, if you hit the AMP cache URL from a desktop browser it will redirect you to the desktop, however, if you hit an AMP link using an activation script like `https://www.gq.com/story/gq-eye-exclusive-fatherhood-style-series---todd-snyder/amp` it will take you to the AMP version, regardless of platform or form factor. I find this even more interesting, why restrict some ways to access the content from some form factors and not others? Am I missing the point of the URLs?
 
 ### Performance
 
-People have been working with performance for years. The early work Ilia Grigorik and Addy Osmani did and continue to do at Google, tools like UNCSS, the fact that we can precache and preload content, the fact that we have PWA and its component technologiies available within and outside PWAs, among other things, really makes me wonder how lazy we've become as developers.
+People have been working with performance for years. The early work Ilia Grigorik and Addy Osmani did and continue to do at Google, tools like UNCSS, the fact that we can precache and preload content (but not provide automatic preloading like Google does with AMP search results), the fact that we have PWA and its component technologiies available within and outside PWAs really makes me wonder how lazy we've become as developers.
 
-Nothing that AMP does is new and most of those techniques are available to most browsers (old and evergreen) right now. I strongly believe it's the search carrot that brings people to AMP, not the technology itself.
 
-I'll take three examples of things we can do now to make experiences better without AMP: Image Optimization, Resource Pioritization and Service Workers.
+I'll take three examples of things we can do now to make experiences outside of an AMP environment: Image Optimization, Resource Pioritization and Service Workers.
 
 We know that images make up for a large fraction of what gets pushed into a web page, we don't evangelize tools like [Imagemin](https://github.com/imagemin/imagemin) and workflows that use these tools to generate smaller images.
 
-**_Does `amp-image` really reduce the bloat problem?_**
+**_Does `amp-image` really reduce the bloat problem?_** If you make the images smaller that means people will put even more images in a page because the size of each individual image is smaller so we can use more of them, we don't need to worry about the individual image, AMP will take care of that.
 
 It is not hard to create a good [resource prioritization](https://developers.google.com/web/fundamentals/performance/resource-prioritization) strategy using a combination of H2 Push, link preload, prefetch, prerender and dns-prefetch to load resources the way we want them to. If we compare this with lazy loading content so they will only load when needed, we have a much better web experience.
 
@@ -328,7 +342,7 @@ I recently came accross Tim Kladec's [How Fast Is Amp Really?](https://timkadlec
 3. How well does AMP perform when the library is served using the AMP cache?
 4. How well does AMP perform compared to the canonical article?
 
-His findings mirror my opinion about AMP not doing anything that we can't do in the open web. To me, the most, important section of Tim's article is when he talks about weight reduction:
+His findings mirror my opinion about AMP not doing anything that we can't do in the open web. To me, the most, important section of Tim's article is when he talks about page weight reduction:
 
 > The 90th percentile weight for the canonical version is 5,229kb. The 90th percentile weight for AMP documents served from the same origin is 1,553kb— a savings of around 70% in page weight. The 90th percentile request count for the canonical version is 647, for AMP documents it’s 151. That’s a reduction of nearly 77%.
 >
@@ -338,7 +352,7 @@ His findings mirror my opinion about AMP not doing anything that we can't do in 
 >
 > From: [How Fast Is Amp Really?](https://timkadlec.com/remembers/2018-03-19-how-fast-is-amp-really/)
 
-AMP restricts what you can do with Javascript and what you can do with custom AMP elements restricts what you can do on your pages and, regardless of the reasons why you put the restrictions in place, it shouldn't be up to a library or framework to dictate how much stuff you put in a page but it's up to the designers and developers to slim down their content.
+AMP restricts what you can do with Javascript and what you can do with custom AMP elements restricts what you can do on your pages and, regardless of the reasons why you put the restrictions in place, it shouldn't be up to a library or framework to dictate how much stuff you put in a page but it's up to the designers and developers to slim down their content... easier said than done, I know, but AMP hasn't sold me as the solution or even a good solution to this problem and neither do publishers, otherwise AMP would be the canonical version of all published web content.
 
 ## Conclusion
 
@@ -349,11 +363,11 @@ I wrote the tweet below as a response to my original tweet.
 
 As I've mentioned throughout this post the technology behind AMP is not revolutionary. It's a reaction to a problem on the mobile web and it has been taken as a way to gate keep and restrict what can be done on the web.
 
-There are many unanswered questions about AMP and the direction it's going on. The [roadmap](https://www.ampproject.org/roadmap/) and it's [Q2 Update](https://www.ampproject.org/latest/blog/amp-roadmap-update-for-end-of-q2/) are clear on the features they are implementing but not on how do new developers choose whether to opt in to AMP altogherther or the new features.
+There are many unanswered questions about AMP and the direction it's going on.
 
-Attempting to make AMP the canonical version of your web content worries me. I mentioned earlier but having Amp Stories be completely different to any non-amp alternatives makes me worry about which version of an amp-story will the Google Crawler run if there are two related stories.
+Attempting to make AMP the canonical version of your web content worries me or simply moving away from having an HTML versionn altogether means that people may choose to learn AMP but not HTML and when AMP limitations become too restrictive will not know how to build web content that doesn't require AMP and be starting from square one again.
 
-It also worries me because if we make AMP the cannonical version of our content then it won't be long before people say why should we have to worry about non-amp content?
+I mentioned earlier but having Amp Stories be completely different to any non-amp alternatives makes me worry as much if not more than making AMP the canonical version of my content. If there is no relation between my web content and the AMP stories that are built around it then what's going to be the content that gets returned by the Googlebot when you search for it? I know this is not, strictly, an AMP issue and more of a search issue but since it's an AMP product it's worth pointing out here.
 
 I'll keep my mind open towards AMP (after all I still provide AMP for my blog content to help people with slow connections or who may have data cost issues) but there are too many open questions about the platform and its direction before I can say I agree with their assessment of moving the web forward.
 
@@ -380,9 +394,9 @@ I'll keep my mind open towards AMP (after all I still provide AMP for my blog co
   * [Evolving Google AMP at Condé Nast](https://technology.condenast.com/story/evolving-google-amp-at-conde-nast)
 * Questions, Commennts and Criticisms
   * Ethan Marcotte
-   * [I, for one](https://ethanmarcotte.com/wrote/i-for-one/)
-   * [AMPlified](https://ethanmarcotte.com/wrote/amplified/)
-   * [AMPersand](https://ethanmarcotte.com/wrote/ampersand/)
+    * [I, for one](https://ethanmarcotte.com/wrote/i-for-one/)
+    * [AMPlified](https://ethanmarcotte.com/wrote/amplified/)
+    * [AMPersand](https://ethanmarcotte.com/wrote/ampersand/)
   * Jeremy Keith
     * [AMPed up](https://adactio.com/journal/9646)
     * [The meaning of AMP](https://adactio.com/journal/13035)
