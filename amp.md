@@ -40,7 +40,7 @@ Most people won't bother to check the search console to see if there is a proble
 
 So whose fault is it? Mine? The plugin developer? The AMP team?
 
-We also don't know if [AMP Validation Errors](https://www.ampproject.org/docs/troubleshooting/validation_errors) will cause the page not to render or if these are warnings of things that must be fixed to be compliant.
+I also don't know if [AMP Validation Errors](https://www.ampproject.org/docs/troubleshooting/validation_errors) will cause the page not to render or if these are warnings of things that must be fixed to be compliant.
 
 **Garbage in, Garbage out**
 
