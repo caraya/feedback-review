@@ -192,7 +192,7 @@ Responsive layout is one of the few places where I use a framework. I started pl
 
 #### Web fonts and Typography
 
-I've written about font loading and optimization. For the most part this is a matter of using tools like [Fontface Observer](https://fontfaceobserver.com/) and its standard equivalent, `font-display` to control the behavior of the downloadable fonts and their fallbacks, subsetting fonts so it'll only use the characters actually on your pages among other things.
+I've written about font loading and optimization. For the most part this is a matter of using tools like [Fontface Observer](https://fontfaceobserver.com/) and its standard complementary tool, `font-display` to control the behavior of the downloadable fonts and their fallbacks, subsetting fonts so it'll only use the characters actually on your pages among other things.
 
 The following script uses Fontface Observer to work with Noto Sans and Noto Mono. It loads them and notifies you if it's unable to. It then switches the class of the HTML element to use the web font or the backup you've assigned.
 
@@ -226,19 +226,15 @@ This is a combination of generating the images during the build process and bein
 
 There are many situations that we have to adapt our images for. Some of the use cases:
 
-1. Our images need to be able to render crisply at different device-pixel-ratios (Retina displays and other modern phones and screens). We want images that will render well in this high density screens but won't be wasted bytes in lower resolution devices
-2. We need to acommodate different break points in responsive layouts
-   * To solve both use cases we want our images to be available in multiple resolutions and densities so that they scale well in fluid layouts and look good in Retina displays
-3. Sometimes we’ll want to customize images beyond simple scaling. We might want to crop or change images. We’ll call this the `art-direction` use case.
-4. Different browsers support different image formats. We can send WebP images to browsers that support thenm, and JPEGs or PNGs to browsers that don’t. We’ll call this the `type-switching` use case.
+1. We want our images to be available in multiple resolutions and densities so that they scale well in fluid layouts and look good in Retina displays
+2. Sometimes we might want to crop or change images to match the design of a site or layout, in essence, providing `art direction` for the project
+3. Provide images in different formats for browsers that support them. We can provide WebP images for those browsers that support them and give PNG and JPEG to those browsers that don't support WebP
 
 To see possible solutions to these use cases see the Responsive Images Community Group [page of demos](https://responsiveimages.org/demos/) and [Responsive Images Done Right: A Guide To <picture> And srcset](https://www.smashingmagazine.com/2014/05/responsive-images-done-right-guide-picture-srcset/)
 
-Templates would allow the automation of this process by creating templates that would only require the name of the image and would paste it where appropriate in the image element and it's children.
+Templates and template engines would allow the automation of this process by creating templates that only require the name of the image and would paste it where appropriate in the image element and it's children. When  I've used them I've always included templating as part of the build process.
 
-If you're using templates it may be worth the time to include template compilation as part of your build process.
-
-Zell Liew wrote a good introductory article on [modularizing content with templating engines and Gulp](https://zellwk.com/blog/nunjucks-with-gulp/).
+Zell Liew wrote a good introductory article on [modularizing content with templating engines and Gulp](https://zellwk.com/blog/nunjucks-with-gulp/). It should be too hard to extend the idea to other build systems.
 
 #### Lazy loading images and videos
 
@@ -274,7 +270,7 @@ This is what a table-based layout in the early 1990's looked like. It used table
 
 Around this time CSS came out and the big debate on whether we should design with tables or using CSS. I find it funny that, as late as 2009, there was still [some discussion](http://vanseodesign.com/css/css-divs-vs-tables/) about it along with pros and cons for each option.
 
-The next stage was designing with floats. We use margins and explicit sizing for elements in CSS. In this example we set the `nav` element is 200 pixels wide and floated to the left; the `section` element is placed 200 pixels from the left margin and, since it doesn't have a `float`attribute, it'll float display after the element floated to the left.
+The next stage was designing with floats. We use margins and explicit sizing for elements in CSS. In this example we set the `nav` element is 200 pixels wide and floated to the left; the `section` element is placed 200 pixels from the left margin and, since it doesn't have a `float`attribute, it'll float after the element floated to the left.
 
 ```css
 nav {
@@ -313,16 +309,16 @@ When we apply the CSS to the HTML below we get a navigation section displayed on
     </ul>
   </nav>
 
-  <section>
+  <div>
     <p>
       This example works just like the last one. Notice we
       put a <code>clearfix</code> on the container. It's not
       needed in this example, but it would be if the
       <code>nav</code> was longer than the non-floated content.
     </p>
-  </section>
+  </div>
 
-  <section>
+  <div>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       Phasellus imperdiet, nulla et dictum interdum, nisi lorem
@@ -330,7 +326,7 @@ When we apply the CSS to the HTML below we get a navigation section displayed on
       dolor. Maecenas nisl est, ultrices nec congue eget, auctor
        vitae massa.
     </p>
-  </section>
+  </div>
 </div>
 ```
 
@@ -340,7 +336,7 @@ The earliest examples I've been able to find are for version 2 of the frameworks
 
 Both frameworks provided a 12-column grid that you could section in as many columns as you wanted. You had also to specify how many rows you wanted and each row could have a different number of columns.
 
-In this section we're only concerning ourselves with the layout. Both Bootstrap and Foundation provide Javascript libraries for basic site functionality like acordions and similar functionality that require more than Javascript to function properly.
+In this section we're only concerning ourselves with the layout. Both Bootstrap and Foundation provide Javascript libraries for basic site layout elements like acordions and similar that required Javascript to function properly.
 
 The first example uses the syntax provided by Foundation for Sites:
 
@@ -598,9 +594,9 @@ As with the Flexbox we've added an additional class to the child items so we can
 </div>
 ```
 
-We can combine flexbox and grid in the same layout or we can use them for whatever they are bet suited for.
+We can combine flexbox and grid in the same layout or we can use them for whatever they are best suited for.
 
-RWD is still a thing but the more we play with the technologies available to us now we can get as close as we can to print layouts; sure there are some things that are missing like fragmentation but we're closer now than we've ever been.
+RWD is still a thing but the more we play with the technologies available to us now we can get as close as we can to print layouts; sure there are some things that are missing like fragmentation to create regions for different pieces of text, but we're closer now than we've ever been.
 
 Responsive design is great but it comes with a complexity price attached to it. Ethan released RWD to the world at the dawn of the mobile flood when desktop was still the predominant target for the web. Now we have to worry about pixel density and how will how images look in the newest 4x Retina display, we have many more combinations of tablets, phones, landscape versus portrait, and many more screen sizes across the spectrum.
 
@@ -702,13 +698,13 @@ In the beginning frameworks were necessary because browsers were incompatible an
 
 Another thing worth remembering is that when you use a framework you're not only buying into the functionality you need; it's an all or nothing proposition. Either you use the full set of capabilities the framework offers or you are wasting bandwidth sending over unnecessary bytes if you don't slim down your framework.
 
-One last thing about the complexity curve. Sooner or later it'll come a time when no one member of your team will know or understand all of the code in your application. What happens when a key member of your team who understands the majority of your code leaves or when you decide to refactor the code or more to a different framework that has become the latest and greatest?
+One last thing about the complexity curve. Sooner or later it'll come a time when no one on your team will understand all of the code in your application. What happens when a key member of your team who understands the majority of your code leaves or when you decide to refactor the code or more to a different framework that has become the latest and greatest?
 
 A separate issue, for me, is when to use a library versus when to use a framework, and how to tell the difference.
 
 In [When Does a Project Need React?](https://css-tricks.com/project-need-react/) Chris Coyier presents a list of items to consider when implemeting an application and whether to use React and its ecosystem or other less complex alternatives. I think the same type of question needs to be asked from any framework... is React overkill? Angular? Polymer?
 
-I'm not against frameworks and libraries, they have their place. What worries me is that we're reaching for frameworks when we don't neccessarily have to and byt not doing so we save ourselves from fatigue
+I'm not against frameworks and libraries, they have their place. What worries me is that we're reaching for frameworks when we don't neccessarily have to and by not doing so we save ourselves from fatigue.
 
 ## References
 
